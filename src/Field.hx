@@ -9,15 +9,15 @@ class Field
 {
 	//Spriteを作成
 	//(getter,setter):(可,不可)
-	public var field(default, null):Field;
+	public var field/*(default, null)*/:Sprite;
 
+	static inline var BLACK:UInt = 0x000000;
+	
 	public function new(x:Int, y:Int, width:Int, height:Int)
 	{
 		field = new Sprite();
-
 		var graphics = field.graphics;
-
-		graphics.beginFill(0x000000);
+		graphics.beginFill(BLACK);
 		graphics.drawRect(0, 0, width, height);
 		graphics.endFill();
 

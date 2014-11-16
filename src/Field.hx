@@ -4,6 +4,7 @@ package ;
  * なのでx,yは0になる
  * @auther k_muko
  */
+
 import flash.net.URLRequest;
 import flash.display.Loader;
 import flash.Lib;
@@ -14,6 +15,7 @@ class Field
 	//(getter,setter):(可,不可)
 	public var field(default, null):Sprite;
 	public var startButton(default, null):Sprite;
+	public var stopButton(default, null):Sprite;
 	
 	static inline var BLACK:UInt = 0x000000;
 	static inline var x:Int = 0;
@@ -42,8 +44,15 @@ class Field
 		
 		//ボタンを作成,配置する
 		//filepathはswfファイルからの相対パス
-		startButton = ButtonCreator(0, 0, "../res/start.png");
+		//x,yにマジックナンバー使っちゃうけど、拡張する気もないしいいかな...
+		var buttonX:Int = Math.floor((width/2)-100);
+		var buttonY:Int = Math.floor(height/2);
+		
+		startButton = ButtonCreator(buttonX, buttonY, "../res/start.png");
 		stage.addChild(startButton);
+		
+		stopButton = ButtonCreator(buttonX, buttonY + Math.floor(buttonY/2), "../res/stop.png");
+		stage.addChild(stopButton);
 	}
 	
 	private function ButtonCreator(x:Int, y:Int, filepath:String):Sprite
@@ -52,10 +61,10 @@ class Field
 		var loader:Loader = new Loader();
 		var url : URLRequest = new URLRequest(filepath);
 		loader.load(url);
-		sprite.x = 100;
-		sprite.y = 100;
+		sprite.x = x;
+		sprite.y = y;
 		sprite.addChild(loader);
-		
+
 		return sprite;
 	}
 }

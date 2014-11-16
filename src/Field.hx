@@ -5,6 +5,8 @@ package ;
  * @auther k_muko
  */
 
+import flash.events.MouseEvent;
+import flash.events.Event;
 import flash.net.URLRequest;
 import flash.display.Loader;
 import flash.Lib;
@@ -16,6 +18,7 @@ class Field
 	public var field(default, null):Sprite;
 	public var startButton(default, null):Sprite;
 	public var stopButton(default, null):Sprite;
+	public var timer : StopWatch = new StopWatch();
 	
 	static inline var BLACK:UInt = 0x000000;
 	static inline var x:Int = 0;
@@ -53,6 +56,8 @@ class Field
 		
 		stopButton = ButtonCreator(buttonX, buttonY + Math.floor(buttonY/2), "../res/stop.png");
 		stage.addChild(stopButton);
+		
+		stage.addEventListener(Event.ENTER_FRAME, stage_EnterFrame);
 	}
 	
 	private function ButtonCreator(x:Int, y:Int, filepath:String):Sprite
@@ -66,5 +71,20 @@ class Field
 		sprite.addChild(loader);
 
 		return sprite;
+	}
+	
+	private function mouseClick(event:MouseEvent):Void
+	{
+		var clickButton:Sprite = event.target;
+		if(clickButton == startButton){
+			var time : Int = 1000 * 3;
+			timer.delaySetter(time);
+		}else{
+			timer.Stopper();
+		}
+	}
+	
+	private function stage_EnterFrame(event:Event):Void
+	{
 	}
 }

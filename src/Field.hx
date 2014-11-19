@@ -57,6 +57,8 @@ class Field
 		stopButton = ButtonCreator(buttonX, buttonY + Math.floor(buttonY/2), "../res/stop.png");
 		stage.addChild(stopButton);
 		
+		startButton.addEventListener(MouseEvent.CLICK, startClick);
+		stopButton.addEventListener(MouseEvent.CLICK, stopClick)
 		stage.addEventListener(Event.ENTER_FRAME, stage_EnterFrame);
 	}
 	
@@ -73,7 +75,7 @@ class Field
 		return sprite;
 	}
 	
-	private function mouseClick(event:MouseEvent):Void
+	private function startClick(event:MouseEvent):Void
 	{
 		var clickButton:Sprite = event.target;
 		if(clickButton == startButton){
@@ -82,6 +84,11 @@ class Field
 		}else{
 			timer.Stopper();
 		}
+	}
+	
+	private function stopClick(event:MouseEvent):Void
+	{
+		
 	}
 	
 	private function stage_EnterFrame(event:Event):Void

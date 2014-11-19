@@ -58,7 +58,7 @@ class Field
 		stage.addChild(stopButton);
 		
 		startButton.addEventListener(MouseEvent.CLICK, startClick);
-		stopButton.addEventListener(MouseEvent.CLICK, stopClick)
+		stopButton.addEventListener(MouseEvent.CLICK, stopClick);
 		stage.addEventListener(Event.ENTER_FRAME, stage_EnterFrame);
 	}
 	
@@ -74,24 +74,26 @@ class Field
 
 		return sprite;
 	}
-	
+	/**
+	*buttonClick
+	* 押されたボタンがstartButtonなら時間をセットしスタートする
+	* stopButtonならば止める
+	* それ以外を拡張する場合を考えて、どちらでもなかったら安全のため止める
+**/
 	private function startClick(event:MouseEvent):Void
 	{
-		var clickButton:Sprite = event.target;
-		if(clickButton == startButton){
 			var time : Int = 1000 * 3;
 			timer.delaySetter(time);
-		}else{
-			timer.Stopper();
-		}
+			timer.Starter();
 	}
 	
 	private function stopClick(event:MouseEvent):Void
 	{
-		
+		timer.Stopper();
 	}
 	
 	private function stage_EnterFrame(event:Event):Void
 	{
+		timer.update();
 	}
 }

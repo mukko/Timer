@@ -23,7 +23,8 @@ class Field
 	static inline var BLACK:UInt = 0x000000;
 	static inline var x:Int = 0;
 	static inline var y:Int = 0;
-	
+	//筋トレタイマーなので、鳴らす間隔を1秒に固定
+	static inline var loopTime:Int = 1000;
 	
 	public function new()
 	{
@@ -36,25 +37,27 @@ class Field
 		var width = stage.stageWidth;
 		var height = stage.stageHeight;
 		
-		graphics.beginFill(0xffffff);
+		graphics.beginFill(BLACK);
 		graphics.drawRect(x, y, width, height);
 		graphics.endFill();
 		
 		field.x = x;
 		field.y = y;
 		stage.addChild(field);
-		trace(width,height);
+		//trace(width,height);
 		
 		//ボタンを作成,配置する
 		//filepathはswfファイルからの相対パス
 		//x,yにマジックナンバー使っちゃうけど、拡張する気もないしいいかな...
-		var buttonX:Int = Math.floor((width/2)-100);
-		var buttonY:Int = Math.floor(height/2);
 		
-		startButton = ButtonCreator(buttonX, buttonY, "../res/start.png");
+		var buttonX:Int = Math.floor((width/2)-100);
+		var buttonSY:Int = Math.floor(height/3-50);
+		var buttonEY:Int = Math.floor(buttonSY + (height/3));
+		
+		startButton = ButtonCreator(buttonX, buttonSY, "../res/start.png");
 		stage.addChild(startButton);
 		
-		stopButton = ButtonCreator(buttonX, buttonY + Math.floor(buttonY/2), "../res/stop.png");
+		stopButton = ButtonCreator(buttonX, buttonEY, "../res/stop.png");
 		stage.addChild(stopButton);
 		
 		startButton.addEventListener(MouseEvent.CLICK, startClick);
@@ -82,8 +85,7 @@ class Field
 **/
 	private function startClick(event:MouseEvent):Void
 	{
-			var time : Int = 1000 * 3;
-			timer.delaySetter(time);
+			timer.delaySetter(loopTime);
 			timer.Starter();
 	}
 	

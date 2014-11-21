@@ -64,7 +64,10 @@ class Field
 		stopButton.addEventListener(MouseEvent.CLICK, stopClick);
 		stage.addEventListener(Event.ENTER_FRAME, stage_EnterFrame);
 	}
-	
+	/**
+	*ButtonCreator
+	*filepathに相対パスを入れる
+**/
 	private function ButtonCreator(x:Int, y:Int, filepath:String):Sprite
 	{
 		var sprite:Sprite = new Sprite();
